@@ -1,0 +1,1455 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #0077b6 0%,
+            #006494 30%,
+            #023e8a 65%,
+            #001845 100%
+        );
+
+    color: white;
+}
+
+/* PANTALLAS */
+
+.pantalla {
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+.pantalla.activa {
+    display: flex;
+}
+
+/* LUZ DEL OCÉANO */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    top: -100px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 120%;
+    height: 70vh;
+
+    background:
+        radial-gradient(
+            ellipse at top,
+            rgba(255,255,255,0.25),
+            transparent 65%
+        );
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    animation: luzMar 6s ease-in-out infinite alternate;
+}
+
+
+@keyframes luzMar {
+
+    from {
+        opacity: .4;
+    }
+
+    to {
+        opacity: .9;
+    }
+
+}
+
+/* LOGIN */
+
+.login-card {
+
+    width: 100%;
+    max-width: 420px;
+
+    padding: 38px 30px;
+
+    border-radius: 30px;
+
+    text-align: center;
+
+    background:
+        rgba(0, 20, 60, .55);
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.35);
+
+    animation:
+        aparecerLogin 1s ease;
+}
+
+
+@keyframes aparecerLogin {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(60px)
+            scale(.9);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+.icono-mar {
+
+    font-size: 60px;
+
+    margin-bottom: 15px;
+
+    animation:
+        flotar 3s ease-in-out infinite;
+}
+
+
+@keyframes flotar {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+}
+
+
+.login-card h1 {
+
+    font-size: 30px;
+
+    margin-bottom: 5px;
+}
+
+
+.login-card h2 {
+
+    font-weight: normal;
+
+    color: #90e0ef;
+
+    margin-bottom: 15px;
+}
+
+
+.descripcion {
+
+    color: #caf0f8;
+
+    margin-bottom: 30px;
+}
+
+
+/* CAMPOS */
+
+.campo {
+
+    text-align: left;
+
+    margin-bottom: 20px;
+}
+
+
+.campo label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    color: #ade8f4;
+}
+
+
+.campo input {
+
+    width: 100%;
+
+    padding: 15px 17px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    background:
+        rgba(255,255,255,.1);
+
+    color: white;
+
+    outline: none;
+
+    font-size: 16px;
+
+    transition: .3s;
+}
+
+
+.campo input::placeholder {
+    color: rgba(255,255,255,.55);
+}
+
+
+.campo input:focus {
+
+    border-color: #48cae4;
+
+    background:
+        rgba(255,255,255,.18);
+
+    box-shadow:
+        0 0 15px
+        rgba(72,202,228,.4);
+
+}
+
+
+/* BOTONES */
+
+button {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 50px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: #003049;
+
+    background:
+        linear-gradient(
+            90deg,
+            #90e0ef,
+            #00b4d8
+        );
+
+    transition: .3s;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,.25);
+}
+
+
+button:hover {
+
+    transform:
+        translateY(-3px)
+        scale(1.02);
+
+    box-shadow:
+        0 15px 30px
+        rgba(0,0,0,.35);
+
+}
+
+
+#mensajeError {
+
+    margin-top: 17px;
+
+    min-height: 22px;
+
+    color: #ffccd5;
+
+}
+
+/* BURBUJAS */
+
+#burbujas {
+
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    left: 0;
+    top: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 2;
+}
+
+
+.burbuja {
+
+    position: absolute;
+
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.5);
+
+    background:
+        rgba(255,255,255,.08);
+
+    box-shadow:
+        inset 0 0 10px
+        rgba(255,255,255,.3);
+
+    animation:
+        subirBurbuja linear infinite;
+
+}
+
+
+@keyframes subirBurbuja {
+
+    0% {
+
+        transform:
+            translateY(0)
+            translateX(0);
+
+        opacity: 0;
+
+    }
+
+    10% {
+        opacity: .8;
+    }
+
+    50% {
+
+        transform:
+            translateY(-50vh)
+            translateX(30px);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(-120vh)
+            translateX(-30px);
+
+        opacity: 0;
+
+    }
+
+}
+
+/* PECES */
+
+.pez {
+
+    position: fixed;
+
+    font-size: 45px;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+}
+
+
+.pez1 {
+
+    top: 20%;
+
+    animation:
+        nadarDerecha 14s linear infinite;
+}
+
+
+.pez2 {
+
+    top: 65%;
+
+    animation:
+        nadarDerecha 19s linear infinite;
+
+    animation-delay: -8s;
+}
+
+
+.pez3 {
+
+    top: 43%;
+
+    animation:
+        nadarIzquierda 17s linear infinite;
+
+}
+
+
+@keyframes nadarDerecha {
+
+    from {
+        left: -100px;
+    }
+
+    to {
+        left: 110%;
+    }
+
+}
+
+
+@keyframes nadarIzquierda {
+
+    from {
+
+        right: -100px;
+
+        transform:
+            scaleX(-1);
+
+    }
+
+    to {
+
+        right: 110%;
+
+        transform:
+            scaleX(-1);
+
+    }
+
+}
+
+/* CUMPLEAÑOS */
+
+.contenido-cumple {
+
+    width: 100%;
+
+    max-width: 700px;
+
+    text-align: center;
+
+    animation:
+        entrarCumple 1.2s ease;
+}
+
+
+@keyframes entrarCumple {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.4)
+            rotate(-5deg);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+
+    }
+
+}
+
+
+.corona {
+
+    font-size: 70px;
+
+    animation:
+        flotar 2s ease-in-out infinite;
+}
+
+
+.mini-texto {
+
+    color: #ade8f4;
+
+    margin-bottom: 10px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.titulo-cumple {
+
+    font-size:
+        clamp(
+            30px,
+            7vw,
+            58px
+        );
+
+    text-shadow:
+        0 5px 20px
+        rgba(0,0,0,.4);
+
+}
+
+
+.nombre {
+
+    margin-top: 10px;
+
+    font-size:
+        clamp(
+            40px,
+            10vw,
+            85px
+        );
+
+    color: #ffd166;
+
+    text-shadow:
+
+        0 3px 0 #e09f3e,
+        0 8px 20px
+        rgba(0,0,0,.35);
+
+}
+
+
+.edad-circulo {
+
+    width: 135px;
+    height: 135px;
+
+    border-radius: 50%;
+
+    margin:
+        25px auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+
+        radial-gradient(
+            circle,
+            #ffd166,
+            #f77f00
+        );
+
+    border:
+        5px solid
+        rgba(255,255,255,.8);
+
+    color: #003049;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.3);
+
+    animation:
+        pulsoEdad 2s infinite;
+
+}
+
+
+.edad-circulo span {
+
+    font-size: 58px;
+
+    font-weight: bold;
+
+    line-height: 55px;
+}
+
+
+.edad-circulo small {
+
+    font-weight: bold;
+
+    margin-top: 5px;
+}
+
+
+@keyframes pulsoEdad {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.08);
+
+    }
+
+}
+
+
+.mensaje-principal {
+
+    max-width: 550px;
+
+    margin:
+        0 auto 25px;
+
+    line-height: 1.7;
+
+    font-size: 17px;
+
+    color: #e0fbfc;
+
+}
+
+
+#btnAventura {
+
+    max-width: 340px;
+}
+
+
+.instruccion {
+
+    font-size: 13px;
+
+    color: #90e0ef;
+
+    margin-top: 18px;
+
+}
+
+/* ANIMACIÓN LOGIN CORRECTO */
+
+.sumergiendo {
+
+    animation:
+        sumergir .9s forwards;
+
+}
+
+
+@keyframes sumergir {
+
+    0% {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform: scale(2);
+
+        opacity: 0;
+
+    }
+
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+
+    .login-card {
+
+        padding:
+            30px 22px;
+
+    }
+
+    .login-card h1 {
+
+        font-size: 25px;
+
+    }
+
+    .pez {
+
+        font-size: 33px;
+
+    }
+
+    .edad-circulo {
+
+        width: 115px;
+        height: 115px;
+
+    }
+
+    .edad-circulo span {
+
+        font-size: 48px;
+
+    }
+
+}
+
+/* MAPA DE AVENTURA */
+
+.mapa-contenedor {
+
+    width: 100%;
+    max-width: 900px;
+
+    text-align: center;
+
+    animation: aparecerLogin 1s ease;
+}
+
+
+.titulo-mapa {
+
+    font-size: clamp(32px, 7vw, 60px);
+
+    color: #ffd166;
+
+    margin-bottom: 10px;
+}
+
+
+.subtitulo-mapa {
+
+    color: #caf0f8;
+
+    margin-bottom: 35px;
+
+    font-size: 17px;
+}
+
+
+.mapa {
+
+    width: 100%;
+
+    min-height: 500px;
+
+    position: relative;
+
+    border-radius: 40px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(72,202,228,.25),
+            rgba(0,18,55,.7)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.2);
+
+    box-shadow:
+        inset 0 0 50px rgba(0,0,0,.25),
+        0 20px 50px rgba(0,0,0,.3);
+
+    overflow: hidden;
+}
+
+/* arena del fondo */
+
+.mapa::after {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: -50px;
+    left: 0;
+
+    width: 100%;
+    height: 150px;
+
+    background: #d9b382;
+
+    border-radius: 50% 50% 0 0;
+
+    opacity: .8;
+}
+
+/* ZONAS */
+
+.zona {
+
+    position: absolute;
+
+    width: 160px;
+
+    padding: 15px;
+
+    border-radius: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    align-items: center;
+
+    font-size: 42px;
+
+    background:
+        rgba(255,255,255,.12);
+
+    color: white;
+
+    border:
+        1px solid rgba(255,255,255,.25);
+
+    backdrop-filter: blur(8px);
+
+    cursor: pointer;
+
+    z-index: 3;
+
+    transition: .3s;
+}
+
+
+.zona span {
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+.zona:hover {
+
+    transform: scale(1.1);
+
+    background:
+        rgba(255,255,255,.22);
+}
+
+/* posiciones */
+
+.zona[data-zona="recuerdos"] {
+
+    top: 40px;
+    left: 8%;
+}
+
+
+.zona[data-zona="concha"] {
+
+    top: 230px;
+    left: 12%;
+}
+
+
+.zona[data-zona="botella"] {
+
+    top: 80px;
+    right: 8%;
+}
+
+
+.zona[data-zona="estrella"] {
+
+    top: 260px;
+    right: 12%;
+}
+
+
+.tesoro {
+
+    left: 50%;
+    top: 190px;
+
+    transform: translateX(-50%);
+
+    background:
+        rgba(255,193,7,.2);
+}
+
+
+.tesoro:hover {
+
+    transform:
+        translateX(-50%)
+        scale(1.1);
+}
+
+
+.bloqueado {
+
+    opacity: .5;
+
+    filter: grayscale(1);
+
+    cursor: not-allowed;
+}
+
+
+.zona.completada {
+
+    background:
+        rgba(76, 201, 240, .35);
+
+    box-shadow:
+        0 0 25px
+        rgba(72,202,228,.6);
+}
+
+/* PROGRESO */
+
+#progreso {
+
+    margin-top: 22px;
+
+    color: #ade8f4;
+
+    font-weight: bold;
+}
+
+/* MODAL */
+
+.modal {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.65);
+
+    z-index: 50;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+.modal.activo {
+
+    display: flex;
+}
+
+
+.modal-contenido {
+
+    width: 100%;
+    max-width: 450px;
+
+    position: relative;
+
+    text-align: center;
+
+    padding: 40px 30px;
+
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            160deg,
+            #023e8a,
+            #001845
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.5);
+
+    animation:
+        abrirModal .4s ease;
+}
+
+
+@keyframes abrirModal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(.6);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
+
+.cerrar {
+
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 40px;
+    height: 40px;
+
+    padding: 0;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.15);
+
+    color: white;
+
+    box-shadow: none;
+}
+
+
+.icono-modal {
+
+    font-size: 70px;
+
+    margin-bottom: 20px;
+
+    animation:
+        flotar 2s ease-in-out infinite;
+}
+
+
+.modal-contenido h2 {
+
+    color: #ffd166;
+
+    margin-bottom: 15px;
+
+    font-size: 28px;
+}
+
+
+.modal-contenido p {
+
+    line-height: 1.7;
+
+    color: #e0fbfc;
+}
+
+/* RESPONSIVE MAPA */
+ 
+@media (max-width: 650px) {
+
+    .mapa {
+
+        min-height: 620px;
+    }
+
+    .zona {
+
+        width: 135px;
+
+        font-size: 35px;
+    }
+
+    .zona[data-zona="recuerdos"] {
+
+        top: 30px;
+        left: 5%;
+    }
+
+    .zona[data-zona="botella"] {
+
+        top: 30px;
+        right: 5%;
+    }
+
+    .zona[data-zona="concha"] {
+
+        top: 210px;
+        left: 5%;
+    }
+
+    .zona[data-zona="estrella"] {
+
+        top: 210px;
+        right: 5%;
+    }
+
+    .tesoro {
+
+        top: 420px;
+    }
+
+}
+
+/* CELEBRACION FINAL */
+
+.celebracion-final {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,180,216,.95),
+            rgba(0,24,69,.98)
+        );
+
+}
+
+.celebracion-final.activa {
+
+    display: flex;
+
+    animation:
+        entradaCelebracion
+        .8s ease;
+}
+
+@keyframes entradaCelebracion {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+.celebracion-contenido {
+
+    text-align: center;
+
+    z-index: 120;
+
+    max-width: 650px;
+
+    position: relative;
+
+}
+
+.nivel-texto {
+
+    font-size: 24px;
+
+    letter-spacing: 10px;
+
+    color: #caf0f8;
+
+    margin-bottom: -10px;
+}
+
+.numero-25 {
+
+    font-size:
+        clamp(
+            130px,
+            30vw,
+            260px
+        );
+
+    font-weight: 900;
+
+    line-height: .9;
+
+    color: #ffd166;
+
+    text-shadow:
+
+        0 5px 0 #e09f3e,
+
+        0 10px 30px
+        rgba(0,0,0,.45),
+
+        0 0 60px
+        rgba(255,209,102,.6);
+
+    animation:
+        explotar25
+        1s cubic-bezier(.17,.67,.3,1.4);
+}
+
+@keyframes explotar25 {
+
+    0% {
+
+        transform:
+            scale(0)
+            rotate(-20deg);
+
+    }
+
+    60% {
+
+        transform:
+            scale(1.25)
+            rotate(5deg);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1)
+            rotate(0);
+
+    }
+
+}
+
+.celebracion-contenido h1 {
+
+    font-size:
+        clamp(
+            35px,
+            8vw,
+            70px
+        );
+
+    margin-top: 15px;
+
+    color: white;
+
+    text-shadow:
+        0 5px 15px
+        rgba(0,0,0,.35);
+}
+
+.celebracion-contenido > p {
+
+    font-size: 22px;
+
+    margin-top: 15px;
+}
+
+
+.mensaje-final {
+
+    max-width: 520px;
+
+    margin:
+        20px auto 30px;
+
+    font-size: 17px !important;
+
+    line-height: 1.7;
+
+    color: #e0fbfc;
+}
+
+
+#btnCerrarCelebracion {
+
+    max-width: 300px;
+}
+
+
+/* CONFETI */
+
+#confeti {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+}
+
+.pieza-confeti {
+
+    position: absolute;
+
+    top: -30px;
+
+    width: 12px;
+
+    height: 20px;
+
+    border-radius: 3px;
+
+    animation:
+        caerConfeti
+        linear forwards;
+
+}
+
+@keyframes caerConfeti {
+
+    from {
+
+        transform:
+            translateY(-50px)
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            translateY(110vh)
+            rotate(900deg);
+
+    }
+
+}
+
+/* BURBUJA DORADA */
+
+.burbuja-dorada {
+
+    position: fixed;
+
+    bottom: -80px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #fff8d6,
+            #ffd166,
+            #f77f00
+        );
+
+    box-shadow:
+        0 0 18px
+        rgba(255,209,102,.7);
+
+    pointer-events: none;
+
+    z-index: 110;
+
+    animation:
+        subirDorada
+        linear forwards;
+
+}
+
+
+@keyframes subirDorada {
+
+    from {
+
+        transform:
+            translateY(0)
+            scale(.7);
+
+        opacity: 0;
+
+    }
+
+    15% {
+
+        opacity: 1;
+
+    }
+
+    to {
+
+        transform:
+            translateY(-120vh)
+            scale(1.2);
+
+        opacity: 0;
+
+    }
+
+}
