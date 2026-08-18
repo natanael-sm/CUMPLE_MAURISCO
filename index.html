@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Feliz Cumpleaños Maurisco 🌊</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- BURBUJAS -->
+    <div id="burbujas"></div>
+
+
+    <!-- PECES -->
+    <div class="pez pez1">🐠</div>
+    <div class="pez pez2">🐟</div>
+    <div class="pez pez3">🐡</div>
+
+
+    <!-- ========================= -->
+    <!-- LOGIN -->
+    <!-- ========================= -->
+
+    <section id="login" class="pantalla activa">
+
+        <div class="login-card">
+
+            <div class="icono-mar">
+                ⚓
+            </div>
+
+            <h1>
+                Una aventura te espera
+            </h1>
+
+            <h2>
+                bajo el mar...
+            </h2>
+
+            <p class="descripcion">
+                Solo el cumpleañero puede entrar 🌊
+            </p>
+
+
+            <div class="campo">
+
+                <label>
+                    👤 Nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="usuario"
+                    placeholder="¿Quién eres?"
+                    autocomplete="off">
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    🎂 Edad
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Tu edad es la contraseña">
+
+            </div>
+
+
+            <button id="btnEntrar">
+                🌊 Sumergirme
+            </button>
+
+
+            <p id="mensajeError"></p>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- PANTALLA PRINCIPAL -->
+    <!-- ========================= -->
+
+    <section id="inicio" class="pantalla">
+
+        <div class="contenido-cumple">
+
+            <div class="corona">
+                👑
+            </div>
+
+            <p class="mini-texto">
+                Atención habitantes del océano...
+            </p>
+
+            <h1 class="titulo-cumple">
+
+                🎉 ¡FELIZ CUMPLEAÑOS!
+
+            </h1>
+
+            <h2 class="nombre">
+
+                MAURISCO
+
+            </h2>
+
+
+            <div class="edad-circulo">
+
+                <span id="edadMostrada">
+                    30
+                </span>
+
+                <small>
+                    AÑOS
+                </small>
+
+            </div>
+
+
+            <p class="mensaje-principal">
+
+                Hoy hasta los peces dejaron sus pendientes,
+                las tortugas nadaron más rápido y el océano
+                entero se puso de fiesta. 🐢🌊
+
+            </p>
+
+
+            <button id="btnAventura">
+
+                🏴‍☠️ Comenzar aventura
+
+            </button>
+
+
+            <p class="instruccion">
+
+                Hay algunos secretos escondidos en el océano...
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- MAPA DE AVENTURA -->
+    <!-- ========================= -->
+
+    <section id="aventura" class="pantalla">
+
+        <div class="mapa-contenedor">
+
+            <h1 class="titulo-mapa">
+                🗺️ El Océano de los 25
+            </h1>
+
+            <p class="subtitulo-mapa">
+                Explora cada rincón para desbloquear el tesoro final.
+            </p>
+
+            <div class="mapa">
+
+                <button class="zona" data-zona="recuerdos">
+                    🏝️
+                    <span>Isla de los Recuerdos</span>
+                </button>
+
+                <button class="zona" data-zona="concha">
+                    🐚
+                    <span>Concha Mágica</span>
+                </button>
+
+                <button class="zona" data-zona="botella">
+                    🍾
+                    <span>Mensaje Perdido</span>
+                </button>
+
+                <button class="zona" data-zona="estrella">
+                    ⭐
+                    <span>Estrella de los Deseos</span>
+                </button>
+
+                <button id="tesoroFinal" class="zona tesoro bloqueado">
+                    🔒
+                    <span>Tesoro Final</span>
+                </button>
+
+            </div>
+
+            <p id="progreso">
+                0 de 4 secretos encontrados
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- MODAL DE SORPRESAS -->
+    <!-- ========================= -->
+
+    <div id="modal" class="modal">
+
+        <div class="modal-contenido">
+
+            <button id="cerrarModal" class="cerrar">
+                ✕
+            </button>
+
+            <div id="iconoModal" class="icono-modal">
+                🌊
+            </div>
+
+            <h2 id="tituloModal">
+                Secreto encontrado
+            </h2>
+
+            <p id="textoModal">
+                Mensaje
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- CELEBRACION FINAL -->
+    <!-- ========================= -->
+
+    <div id="celebracionFinal" class="celebracion-final">
+
+        <div class="celebracion-contenido">
+
+            <div class="nivel-texto">
+                NIVEL
+            </div>
+
+            <div class="numero-25">
+                25
+            </div>
+
+            <h1>
+                ¡DESBLOQUEADO!
+            </h1>
+
+            <p>
+                🎉 Feliz cumpleaños Maurisco 🎉
+            </p>
+
+            <p class="mensaje-final">
+                Que este nuevo nivel venga cargado de aventuras,
+                buenos momentos, grandes historias y muchas razones
+                para seguir celebrando. 🌊🐠
+            </p>
+
+            <button id="btnCerrarCelebracion">
+                🌊 Seguir explorando
+            </button>
+
+        </div>
+
+        <div id="confeti"></div>
+
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
