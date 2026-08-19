@@ -505,29 +505,17 @@ function crearBurbujasDoradas() {
         setTimeout(
             function() {
 
-                const burbuja =
-                    document.createElement("div");
+                const burbuja = document.createElement("div");
 
                 burbuja.classList.add(
                     "burbuja-dorada"
                 );
 
+                const tamaño = Math.random() * 30 + 15;
 
-                const tamaño =
-                    Math.random() * 30 + 15;
-
-
-                burbuja.style.width =
-                    tamaño + "px";
-
-                burbuja.style.height =
-                    tamaño + "px";
-
-
-                burbuja.style.left =
-                    Math.random() * 100 + "%";
-
-
+                burbuja.style.width = tamaño + "px";
+                burbuja.style.height = tamaño + "px";
+                burbuja.style.left = Math.random() * 100 + "%";
                 burbuja.style.animationDuration =
                     (
                         Math.random() * 3 + 4
@@ -563,6 +551,14 @@ btnCerrarCelebracion.addEventListener(
     function() {
 
         celebracionFinal.classList.remove(
+            "activa"
+        );
+
+        aventura.classList.remove(
+            "activa"
+        );
+
+        pastelPantalla.classList.add(
             "activa"
         );
 
