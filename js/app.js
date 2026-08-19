@@ -17,6 +17,13 @@ const confeti = document.getElementById("confeti");
 const mensajeError = document.getElementById("mensajeError");
 const edadMostrada = document.getElementById("edadMostrada");
 
+const btnMicrofono = document.getElementById("btnMicrofono");
+const btnApagarManual = document.getElementById("btnApagarManual");
+const estadoMicrofono = document.getElementById("estadoMicrofono");
+const velas = document.querySelectorAll(".vela");
+const finalCumple = document.getElementById("finalCumple");
+const btnReiniciar = document.getElementById("btnReiniciar");
+
 // MOSTRAR EDAD
 edadMostrada.textContent = EDAD_MAURISCO;
 
