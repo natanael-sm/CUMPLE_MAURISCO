@@ -564,3 +564,284 @@ btnCerrarCelebracion.addEventListener(
 
     }
 );
+
+// PASTEL INTERACTIVO
+
+let velasApagadas = 0;
+let audioContext;
+let analizador;
+let microfono;
+let escuchandoSoplido = false;
+
+// TOCAR VELAS
+
+velas.forEach(
+    function(vela) {
+
+        vela.addEventListener(
+            "click",
+            function() {
+
+                apagarVela(vela);
+
+            }
+        );
+
+    }
+);
+
+// APAGAR UNA VELA
+
+function apagarVela(vela) {
+
+    if(
+        vela.classList.contains(
+            "apagada"
+        )
+    ) {
+
+        return;
+
+    }
+
+    vela.classList.add(
+        "apagada"
+    );
+
+    velasApagadas++;
+
+    estadoMicrofono.textContent =
+        "🔥 " +
+        velasApagadas +
+        " de 5 velas apagadas";
+
+
+    comprobarVelas();
+
+}
+
+// BOTON MANUAL
+
+btnApagarManual.addEventListener(
+    "click",
+    function() {
+
+        const velasEncendidas =
+            document.querySelectorAll(
+                ".vela:not(.apagada)"
+            );
+
+
+        if(velasEncendidas.length > 0) {
+
+            apagarVela(
+                velasEncendidas[0]
+            );
+
+        }
+
+    }
+);
+
+// COMPROBAR TODAS LAS VELAS
+
+function comprobarVelas() {
+
+    if(velasApagadas >= 5) {
+
+        estadoMicrofono.textContent =
+            "🎉 ¡Todas las velas están apagadas!";
+
+        setTimeout(
+            function() {
+
+                mostrarFinalCumple();
+
+            },
+            1200
+        );
+
+    }
+
+}
+
+// MICROFONO
+btnMicrofono.addEventListener(
+    "click",
+    activarMicrofono
+);
+
+
+async function activarMicrofono() {
+
+    try {
+
+        estadoMicrofono.textContent =
+            "🎤 Activando micrófono...";
+
+
+        const stream =
+            await navigator.mediaDevices
+                .getUserMedia({
+                    audio: true
+                });
+
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+
+        analizador =
+            audioContext.createAnalyser();
+
+
+        microfono =
+            audioContext
+                .createMediaStreamSource(
+                    stream
+                );
+
+
+        microfono.connect(
+            analizador
+        );
+
+
+        analizador.fftSize = 256;
+
+
+        escuchandoSoplido = true;
+
+
+        btnMicrofono.textContent =
+            "🎤 Escuchando... ¡sopla!";
+
+
+        estadoMicrofono.textContent =
+            "💨 Sopla cerca del micrófono...";
+
+
+        detectarSoplido();
+
+    }
+
+    catch(error) {
+
+        console.log(error);
+
+        estadoMicrofono.textContent =
+            "⚠️ No pude usar el micrófono. Puedes apagar las velas tocándolas.";
+
+    }
+
+}
+
+
+// =======================================
+// DETECTAR SOPLIDO
+// =======================================
+
+function detectarSoplido() {
+
+    if(!escuchandoSoplido) {
+
+        return;
+
+    }
+
+
+    const datos =
+        new Uint8Array(
+            analizador.frequencyBinCount
+        );
+
+
+    analizador.getByteFrequencyData(
+        datos
+    );
+
+
+    let suma = 0;
+
+
+    for(let i = 0; i < datos.length; i++) {
+
+        suma += datos[i];
+
+    }
+
+
+    const volumen =
+        suma / datos.length;
+
+
+    // puedes ajustar este numero
+    // si detecta demasiado facil o muy dificil
+
+    if(volumen > 45) {
+
+        const velasEncendidas =
+            document.querySelectorAll(
+                ".vela:not(.apagada)"
+            );
+
+
+        if(velasEncendidas.length > 0) {
+
+            apagarVela(
+                velasEncendidas[0]
+            );
+
+        }
+
+    }
+
+
+    requestAnimationFrame(
+        detectarSoplido
+    );
+
+}
+
+
+// =======================================
+// FINAL DE CUMPLEAÑOS
+// =======================================
+
+function mostrarFinalCumple() {
+
+    escuchandoSoplido = false;
+
+
+    pastelPantalla.classList.remove(
+        "activa"
+    );
+
+
+    finalCumple.classList.add(
+        "activo"
+    );
+
+
+    crearConfeti();
+
+    crearBurbujasDoradas();
+
+}
+
+
+// =======================================
+// REINICIAR EXPERIENCIA
+// =======================================
+
+btnReiniciar.addEventListener(
+    "click",
+    function() {
+
+        location.reload();
+
+    }
+);
