@@ -187,23 +187,14 @@ for(let i = 0; i < 15; i++) {
 // BOTON AVENTURA & MAPA DE AVENTURA
 
 const aventura = document.getElementById("aventura");
-
 const zonas = document.querySelectorAll(".zona[data-zona]");
-
 const tesoroFinal = document.getElementById("tesoroFinal");
-
 const progreso = document.getElementById("progreso");
-
 const modal = document.getElementById("modal");
-
 const cerrarModal = document.getElementById("cerrarModal");
-
 const iconoModal = document.getElementById("iconoModal");
-
 const tituloModal = document.getElementById("tituloModal");
-
 const textoModal = document.getElementById("textoModal");
-
 
 let secretosEncontrados = [];
 
@@ -238,12 +229,9 @@ const secretos = {
 
 
     concha: {
-
         icono: "🐚",
-
         titulo:
             "La Concha Mágica",
-
         texto:
             "Dicen que si acercas una concha al oído puedes escuchar el mar... pero esta dice otra cosa: que tengas un año lleno de éxitos, tranquilidad, buena salud y muchos momentos que valga la pena recordar. 🐚✨"
 
@@ -251,12 +239,9 @@ const secretos = {
 
 
     botella: {
-
         icono: "🍾",
-
         titulo:
             "Mensaje Perdido",
-
         texto:
             "Después de navegar miles de kilómetros, apareció este mensaje: Nunca dejes de disfrutar las cosas simples, las buenas amistades y esas experiencias que terminan convirtiéndose en las mejores historias. 🍾🌊"
 
@@ -264,19 +249,15 @@ const secretos = {
 
 
     estrella: {
-
         icono: "⭐",
-
         titulo:
             "Estrella de los Deseos",
-
         texto:
             "Tienes un deseo disponible. No sabemos si la estrella pueda cumplirlo, pero al menos esperamos que este nuevo año venga cargado de cosas buenas. ⭐😂"
 
     }
 
 };
-
 
 // CLICK EN LOS SECRETOS
 
@@ -288,9 +269,7 @@ zonas.forEach(
             function() {
 
                 const nombreZona = zona.dataset.zona;
-
                 const secreto = secretos[nombreZona];
-
 
                 iconoModal.textContent =
                     secreto.icono;
@@ -302,7 +281,6 @@ zonas.forEach(
                     secreto.texto;
 
                 modal.classList.add("activo");
-
 
                 // marcar como visitada
 
@@ -338,13 +316,10 @@ function actualizarProgreso() {
         secretosEncontrados.length +
         " de 4 secretos encontrados";
 
-
     if(secretosEncontrados.length === 4) {
 
         desbloquearTesoro();
-
     }
-
 }
 
 // DESBLOQUEAR TESORO
@@ -671,13 +646,11 @@ btnMicrofono.addEventListener(
     activarMicrofono
 );
 
-
 async function activarMicrofono() {
 
     try {
 
-        estadoMicrofono.textContent =
-            "🎤 Activando micrófono...";
+        estadoMicrofono.textContent = "🎤 Activando micrófono...";
 
 
         const stream =
@@ -694,8 +667,7 @@ async function activarMicrofono() {
             )();
 
 
-        analizador =
-            audioContext.createAnalyser();
+        analizador = audioContext.createAnalyser();
 
 
         microfono =
@@ -711,21 +683,12 @@ async function activarMicrofono() {
 
 
         analizador.fftSize = 256;
-
-
         escuchandoSoplido = true;
-
-
         btnMicrofono.textContent =
             "🎤 Escuchando... ¡sopla!";
-
-
         estadoMicrofono.textContent =
             "💨 Sopla cerca del micrófono...";
-
-
         detectarSoplido();
-
     }
 
     catch(error) {
@@ -739,10 +702,7 @@ async function activarMicrofono() {
 
 }
 
-
-// =======================================
 // DETECTAR SOPLIDO
-// =======================================
 
 function detectarSoplido() {
 
@@ -752,20 +712,16 @@ function detectarSoplido() {
 
     }
 
-
     const datos =
         new Uint8Array(
             analizador.frequencyBinCount
         );
 
-
     analizador.getByteFrequencyData(
         datos
     );
 
-
     let suma = 0;
-
 
     for(let i = 0; i < datos.length; i++) {
 
@@ -773,13 +729,11 @@ function detectarSoplido() {
 
     }
 
-
     const volumen =
         suma / datos.length;
 
 
-    // puedes ajustar este numero
-    // si detecta demasiado facil o muy dificil
+    // ajuste de volumen (sensibilidad microgono)
 
     if(volumen > 45) {
 
@@ -799,43 +753,30 @@ function detectarSoplido() {
 
     }
 
-
     requestAnimationFrame(
         detectarSoplido
     );
 
 }
 
-
-// =======================================
 // FINAL DE CUMPLEAÑOS
-// =======================================
 
 function mostrarFinalCumple() {
 
     escuchandoSoplido = false;
-
-
     pastelPantalla.classList.remove(
         "activa"
     );
-
 
     finalCumple.classList.add(
         "activo"
     );
 
-
     crearConfeti();
-
     crearBurbujasDoradas();
-
 }
 
-
-// =======================================
 // REINICIAR EXPERIENCIA
-// =======================================
 
 btnReiniciar.addEventListener(
     "click",
